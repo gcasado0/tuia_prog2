@@ -211,10 +211,14 @@ class TrucoArgentino(Juego):
           else:
             acumulador[carta.palo] = carta.numero
             cantidad[carta.palo] = 1
+      maximo = 0
       for palo, cant in cantidad.items():
           if cant>1:
               return acumulador[palo] + 20
-      return 0
+          else:
+            if acumulador[palo]>maximo:
+              maximo = acumulador[palo]
+      return maximo
 
 
       
