@@ -67,8 +67,9 @@ class Mazo():
         return len(self.mazo)
 
     def mezclar(self):
-        for i in range(0,50):
-            posicion = random.randrange(50)
+        longitud = self.cantidad()
+        for i in range(0,longitud):
+            posicion = random.randrange(longitud)
             carta = self.mazo.pop(posicion)
             self.mazo.insert(0,carta)
     
@@ -200,7 +201,7 @@ class TrucoArgentino(Juego):
     # por el jugador más veinte puntos (10, 11 y 12 no suman). 
     # Jugamos asumiendo que mano1 es mano del partido (es decir, gana el envido en caso de empate).
 
-    def sumar_puntos(self,mano):
+    def _sumar_puntos_flor(self,mano):
       acumulador = {}
       cantidad = {}
       for carta in mano.mano:
@@ -220,12 +221,34 @@ class TrucoArgentino(Juego):
               maximo = acumulador[palo]
       return maximo
 
-
-      
+    def _sumar_puntos(self,mano):
+      #descarto cartas superiores o iguales a 10
+      cartas_validas = [x for x in mano.mano if x.numero < 10]
+      #analizo si hay convinacion de palos
+      maximos = []
+      if len(cartas_validas)==3:
+          if cartas_validas[0].palo == cartas_validas[1].palo:
+            maximos.append(cartas_validas[0].numero + cartas_validas[1].numero)
+          if cartas_validas[0].palo == cartas_validas[2].palo:
+            maximos.append(cartas_validas[0].numero + cartas_validas[2].numero)
+          if cartas_validas[1].palo == cartas_validas[2].palo:
+            maximos.append(cartas_validas[1].numero + cartas_validas[2].numero)
+          if len(maximos):#si hay alguna convinacion
+            return max(maximos)+20
+      elif len(cartas_validas)==2:
+          if cartas_validas[0].palo == cartas_validas[1].palo:
+            return cartas_validas[0].numero + cartas_validas[1].numero + 20
+      #no hay convinacion de palos
+      maximo=0
+      for c in cartas_validas:
+          if c.numero>maximo:
+            maximo=c.numero
+      return maximo
+          
 
     def gana_envido(self):
-      puntos1 = self.sumar_puntos(self.mano1)
-      puntos2 = self.sumar_puntos(self.mano2)
+      puntos1 = self._sumar_puntos(self.mano1)
+      puntos2 = self._sumar_puntos(self.mano2)
       print(puntos1)
       print(puntos2)
 
@@ -234,6 +257,27 @@ class TrucoArgentino(Juego):
       else:
         return self.mano2.jugador
 
+def test_suma_puntos():
+  truco = TrucoArgentino("Pedro", "Lucho")
+  mano = Mano("j1")
+  mano.agregar(Carta("Espadas",1))
+  assert truco._sumar_puntos(mano) == 1
+  mano.agregar(Carta("Espadas",7))
+  assert truco._sumar_puntos(mano) == 28
+  mano.agregar(Carta("Espadas",6))
+  assert truco._sumar_puntos(mano) == 33
+  mano2 = Mano("j2")
+  mano2.agregar(Carta("Oros",1))
+  mano2.agregar(Carta("Espadas",7))
+  mano2.agregar(Carta("Bastos",6))
+  assert truco._sumar_puntos(mano2) == 7
+  mano3 = Mano("j3")
+  mano3.agregar(Carta("Oros",11))
+  mano3.agregar(Carta("Espadas",12))
+  mano3.agregar(Carta("Bastos",10))
+  assert truco._sumar_puntos(mano3) == 0
+  
+  
 
 #----------------------------- MAIN -------------------------------
 
@@ -241,9 +285,3 @@ truco = TrucoArgentino("Pedro", "Lucho")
 truco.mostrar()
 jugador = truco.gana_envido()
 print(jugador)
-
-
-
-
-
-
