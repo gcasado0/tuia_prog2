@@ -223,7 +223,13 @@ class TrucoArgentino(Juego):
 
     def _sumar_puntos(self,mano):
       #descarto cartas superiores o iguales a 10
-      cartas_validas = [x for x in mano.mano if x.numero < 10]
+      cartas_validas = []
+      for c in mano.mano:
+          if c.numero >= 10:
+            cartas_validas.append(Carta(c.palo,0))
+          else:
+            cartas_validas.append(Carta(c.palo,c.numero))
+
       #analizo si hay convinacion de palos
       maximos = []
       if len(cartas_validas)==3:
