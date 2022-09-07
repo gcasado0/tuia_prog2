@@ -1,12 +1,12 @@
 import random
 
 class Carta():
+  _apodos = {1:"As", 10:"Sota", 11:"Caballo", 12:"Rey"}
 
   def __init__(self, palo=None, numero=None, es_comodin=False) -> None:
     self.palo = palo
     self.numero = numero
     self.es_comodin = es_comodin
-    self._apodos = {1:"As", 10:"Sota", 11:"Caballo", 12:"Rey"}
 
   def __str__(self) -> str:
     if self.es_comodin:
