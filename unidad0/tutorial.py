@@ -23,12 +23,13 @@ print("++++++++++++++++ 5. Herencia Simple ++++++++++++++++++")
 class Pet:
     _number_of_legs = 4 #atributo de clase
 
-    def __init__ (self , name , weight , owner , sex , hair_color):
+    def __init__ (self , name , weight , owner , sex , hair_color, edad=0):
         self.name = name #atributo de instancia
         self.weight = weight
         self.owner = owner
         self.sex = sex
         self.hair_color = hair_color
+        self.edad = edad
     
     def play (self , toy ):
         print (f"{ self . name } is playing with {toy }!")
@@ -39,6 +40,12 @@ class Pet:
 
     def __str__ ( self ):
         return f"Soy { self . name } y mi dueña es { self . owner }"
+    
+    def __eq__ (self , other ):
+        return self . owner == other . owner and self . name == other . name
+    
+    def __lt__(self, other):
+        return self.edad < other.edad
 
 
 
@@ -84,8 +91,18 @@ print (f" Despues de comer , leon pesa : { leon.weight }")
 
 print ( bobo . character ) # friendly
 print ( bobo . name ) # Bobo
+print(bobo)
 
 print("isinstance (bobo , Cat) =",isinstance (bobo , Cat))
 print("isinstance (bobo , Pet) =",isinstance (bobo , Pet))
 print("isinstance (bobo , Dog) =",isinstance (bobo , Dog))
 print("isinstance (bobo , object) =",isinstance (bobo , object))
+
+print("--------------6.3. Igualdad de objetos: El método __eq__-------------")
+
+bobo1 = Cat("Friendly"," Bobo ", 5, " Mela ", " Macho ", [], 2)
+bobo2 = Cat("Friendly"," Bobo ", 5, " Mela ", " Macho ", [], 8)
+print ("bobo1 is bobo2: ", bobo1 is bobo2 ) # False
+print ("bobo1 == bobo2:", bobo1 == bobo2 ) # True
+print ("bobo1 == amelia:", bobo1 == amelia )
+print ("bobo1 < bobo2:", bobo1 < bobo2 ) # True
