@@ -21,14 +21,13 @@ o . o . . # NO
 """
 
 def es_caso_base(problema):
-  if len(problema)==1:
-    return True
+  pass
 
 def dividir(problema, x, y):
-    return problema , problema[mitad:]
+    pass
 
 def combinar(s1,s2):
-  return s1+s2
+  pass
 
 def mostrar(problema,x,y):
     print("----------")
@@ -85,7 +84,16 @@ def test_walkable_path():
     ["o",".","o",".","."],
     ]
 
-    assert not resolver( caso2 , 0,0)
-    assert resolver(caso1, 0, 0)
+    caso3 = [
+    [".","o",".",".","."],
+    [".",".",".","o","."],
+    [".","o","o",".","."],
+    [".",".","o",".","o"],
+    ["o",".",".",".","."],
+    ]
+
+    #assert not resolver( caso2 , 0,0)
+    #assert resolver(caso1, 0, 0)
+    assert resolver(caso3, 0, 0)
 
 test_walkable_path()
