@@ -83,7 +83,16 @@ def test_walkable_path():
     ["o",".","o",".","."],
     ]
 
-    assert not resolver( caso2 , 0,0)
-    assert resolver(caso1, 0, 0)
+    caso3 = [
+    [".","o",".",".","."],
+    [".",".",".","o","."],
+    [".","o","o",".","."],
+    [".",".","o",".","o"],
+    ["o",".",".",".","."],
+    ]
+
+    #assert not resolver( caso2 , 0,0)
+    #assert resolver(caso1, 0, 0)
+    assert resolver(caso3, 0, 0)
 
 test_walkable_path()
