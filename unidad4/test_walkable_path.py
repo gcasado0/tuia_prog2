@@ -21,14 +21,13 @@ o . o . . # NO
 """
 
 def es_caso_base(problema):
-  if len(problema)==1:
-    return True
+    pass
 
 def dividir(problema, x, y):
-    return problema , problema[mitad:]
+    pass
 
 def combinar(s1,s2):
-  return s1+s2
+    pass
 
 def mostrar(problema,x,y):
     print("----------")
@@ -62,7 +61,6 @@ def resolver ( problema , x, y ):
         return False
 
   #subproblema1, subproblema2 = dividir ( problema , x, y )
-
   #solucion1 = resolver ( subproblema1 )
   #solucion2 = resolver ( subproblema2 )
   #return combinar ( solucion1 , solucion2 )
