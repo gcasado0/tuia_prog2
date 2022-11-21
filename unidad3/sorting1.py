@@ -1,35 +1,21 @@
 
-"""
-4. Ordenamiento por inserción
-Dada una lista de n números enteros, el método de inserción para ordenarlo en forma ascendente, es el
-siguiente:
-1. Comenzamos considerando la sub-lista formado solo por el primer elemento. Esta lista esta trivialmente
-ordenada.
-2. Consideramos el siguiente elemento de la lista. En este momento, solo hay dos posibilidades, dado que
-por simplicidad suponemos que no hay elementos repetidos:
-  El elemento que vemos es menor que el primer elemento, y por lo tanto lo ubicamos a la izquierda
-  del mismo.
-  El elemento que vemos es mayor que el primer elemento, y por lo tanto lo ubicamos a la derecha
-  del mismo.
-3. Una vez realizado este, tenemos una sub-lista de tamaño dos ordenado. Repetimos para toda la secuen-
-cia, en cada paso consideramos el siguiente elemento de la lista, y decidimos en que posición tenemos
-que insertarlo
-"""
-
-
-def insertionsort(A):
+def insertionSort(A, eficiencia):
+  comparaciones = 0
   B = []
   for a in A:
     i = 0
     while i<len(B) and a>B[i]:
       i+=1
+      comparaciones += 1
     B.insert(i,a)
+  eficiencia.append(comparaciones)    
   return B
 
-def ordenar_por_insercion(B):
+def insertionSortShift(B, eficiencia):
   A = B[:]
   # Guardamos en n la cantidad de elementos a ordenar
   n = len(A)
+  comparaciones = 0
   for i in range (1,n):
     # Insertamos el elemento en la posición i
     value = A[i]
@@ -40,8 +26,11 @@ def ordenar_por_insercion(B):
         # un lugar a la izquierda
         A[j+1]=A[j]
         j = j - 1
+        comparaciones += 1
       else:
         break
     # Almacenamos el valor actual en el lugar que nos quedo disponible
     A[j+1]=value
+  
+  eficiencia.append(comparaciones)
   return A
