@@ -1,3 +1,9 @@
+"""
+Ejercicio 1: Dado un número entero compuesto, que es producto de dos números primos, 
+hacer un algoritmo de fuerza bruta que encuentre su factorización. 
+Analice la cantidad operaciones que este algoritmo requiere.
+"""
+
 def es_primo(numero):
   for i in range(2,numero):
     if (numero % i == 0):
