@@ -60,6 +60,16 @@ con la mejor solucion.
 
 print("Resuelva con un algoritmo de fuerza bruta")
 
+
+def es_solucion_bruta(eleccion):
+    total = 0
+    for x in eleccion:
+        total += x[1]
+    if total<=5:
+        return True
+    else:
+        return False
+
 def siguiente(i):    
     combinacion = []
     if i<len(posibilidades):
@@ -72,21 +82,21 @@ def siguiente(i):
 i = 1
 posibilidades = [[s,x,y,z] for s in [0,1] for x in [0,1] for y in [0,1] for z in [0,1]]
 candidatos = [(10,1), (20,3), (15,2), (20,4)]
-combinacion = siguiente(i)
+intento_actual = siguiente(i)
 soluciones = []
 maximo=0
 max_solucion = None
-while combinacion:
-    if es_factible(combinacion):
-        soluciones.append(combinacion)
-        total = sum([valor for valor, peso in combinacion])
-        print("solucion",combinacion," total:", total)
+while intento_actual:
+    if es_solucion_bruta(intento_actual):
+        soluciones.append(intento_actual)
+        total = sum([valor for valor, peso in intento_actual])
+        print("solucion", intento_actual," total:", total)
         if total>maximo:
             maximo = total
-            max_solucion = combinacion
+            max_solucion = intento_actual
 
     i=i+1
-    combinacion = siguiente(i)
+    intento_actual = siguiente(i)
 
 
 print("Solucion optima: ",max_solucion)
