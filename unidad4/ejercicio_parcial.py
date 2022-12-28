@@ -10,6 +10,7 @@ objeto 4 20usd 4 kg
 """
 
 
+
 print("Resuelva con un algoritmo voraz")
 
 def rendimiento(objeto):
@@ -102,3 +103,6 @@ while intento_actual:
 print("Solucion optima: ",max_solucion)
 
 
+candidatos =[1000 , 500 , 200 , 100 , 50 , 20 , 10] *2
+
+print(candidatos)
